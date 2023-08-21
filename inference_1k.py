@@ -9,14 +9,14 @@ torch.set_num_threads = 14
 model_v3_en_indic_path = "./models/v3_en_indic.pt"
 model_v3_en_path = "./models/v3_en.pt"
 output_path = "./output/"
-output_file_name = "1kk-you-will-win-in-life.wav"
+output_file_name = "1k-you-will-win-in-life.wav"
 
-principal_speaker = "en_1"
+principal_speaker = "en_84"
 
 sample_rate = 48000
-amount_of_times = 10000
+amount_of_times = 1000
 
-starter_text = "<speak><prosody rate='x-slow'>Subscribe to request your own mantra</prosody><break time='1s' strength='x-weak'/></speak>"
+starter_text = "<speak><prosody rate='slow' pitch='x-high'>Subscribe to request your own mantra by making a comment</prosody><break time='1s' strength='x-weak'/></speak>"
 text_to_speach = "<speak><prosody rate='x-slow'>You will win in life!</prosody></speak>"
 
 
@@ -32,7 +32,11 @@ audios = []
 # Insere a frase inicial
 audios.append(model_v3_en.apply_tts(ssml_text=starter_text, speaker=principal_speaker, sample_rate=sample_rate))
 
+step = 1
 for i in range(amount_of_times):
+    print(f"Step: {step}")
+    step += 1
+
     if i % 2 == 0:
         audios.append(model_v3_en.apply_tts(ssml_text=text_to_speach, speaker="random", sample_rate=sample_rate))
     else:
